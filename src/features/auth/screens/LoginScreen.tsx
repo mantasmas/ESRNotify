@@ -1,7 +1,8 @@
-import styled from '@emotion/native';
 import React from 'react';
+import styled from '@emotion/native';
+import { useForm, Controller } from 'react-hook-form';
+import { Button, TextInput, HelperText } from 'react-native-paper';
 
-import { Button, TextInput } from 'react-native-paper';
 import { Spacer } from '../../../components';
 
 const Container = styled.SafeAreaView`
@@ -11,23 +12,65 @@ const Container = styled.SafeAreaView`
 `;
 
 export function LoginScreen() {
-  const [text, setText] = React.useState('');
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = () => {};
 
   return (
     <Container>
-      <TextInput
-        label="Username"
-        value={text}
-        onChangeText={text => setText(text)}
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            placeholder="Your username"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="username"
       />
+      {errors.username && (
+        <HelperText type="error">This is required.</HelperText>
+      )}
+
       <Spacer height={16} />
-      <TextInput
-        label="Password"
-        value={text}
-        onChangeText={text => setText(text)}
+
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            placeholder="Password"
+            textContentType="password"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="password"
       />
+      {errors.password && (
+        <HelperText type="error">This is required.</HelperText>
+      )}
       <Spacer height={16} />
-      <Button mode="contained">Login</Button>
+      <Button mode="contained" onPress={handleSubmit(onSubmit)}>
+        Login
+      </Button>
     </Container>
   );
 }
