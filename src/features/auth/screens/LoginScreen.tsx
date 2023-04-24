@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Button, TextInput, HelperText } from 'react-native-paper';
 
 import { Spacer } from '../../../components';
+import { useAuth } from '../../../providers/auth.provider';
 
 const Container = styled.SafeAreaView`
   justify-content: center;
@@ -23,7 +24,17 @@ export function LoginScreen() {
     },
   });
 
-  const onSubmit = () => {};
+  const auth = useAuth();
+
+  const onSubmit = ({
+    username,
+    password,
+  }: {
+    username: string;
+    password: string;
+  }) => {
+    return auth!.signin(username, password);
+  };
 
   return (
     <Container>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "205585415831",
+    "project_id": "esr-notifer",
+    "storage_bucket": "esr-notifer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205585415831:android:766eff4de49b76a7d133d2",
+        "android_client_info": {
+          "package_name": "com.esrnotify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205585415831-hk8mttfb2e097s3k9oiro79bmd3kkqb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvhd0Snmf-NeNcsahUIGB1VxQKkuDMU6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205585415831-hk8mttfb2e097s3k9oiro79bmd3kkqb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
