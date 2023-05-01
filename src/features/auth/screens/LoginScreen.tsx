@@ -39,19 +39,19 @@ export function LoginScreen() {
   return (
     <Container>
       <Controller
+        name="username"
         control={control}
         rules={{
           required: true,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            placeholder="Your username"
+            placeholder="Your email"
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
           />
         )}
-        name="username"
       />
       {errors.username && (
         <HelperText type="error">This is required.</HelperText>
@@ -60,6 +60,7 @@ export function LoginScreen() {
       <Spacer height={16} />
 
       <Controller
+        name="password"
         control={control}
         rules={{
           required: true,
@@ -68,12 +69,12 @@ export function LoginScreen() {
           <TextInput
             placeholder="Password"
             textContentType="password"
+            secureTextEntry
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
           />
         )}
-        name="password"
       />
       {errors.password && (
         <HelperText type="error">This is required.</HelperText>
