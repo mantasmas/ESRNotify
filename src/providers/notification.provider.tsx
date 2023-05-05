@@ -4,8 +4,8 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { firebase } from '@react-native-firebase/messaging';
 import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useAuth } from './auth.provider';
+import { useFetch } from './http.provider';
 
 type DeviceToken = {
   token: string | null;
@@ -90,9 +90,10 @@ export const NotificationContainer = () => {
 };
 
 export const Notifications = () => {
-  const ctx = useAuth();
   const setToken = useDeviceToken(state => state.setNew);
   const token = useDeviceToken(state => state.token);
+  const f = useFetch();
+
   useEffect(() => {
     const fn = async () => {
       if (await isNotificationsAvailable()) {
@@ -106,28 +107,20 @@ export const Notifications = () => {
 
     fn().catch(console.error);
   });
+
   useEffect(() => {
     const fn = async () => {
-      return fetch(
-        'https://nlm3f3ird3.execute-api.eu-central-1.amazonaws.com/dev/device',
-        {
-          method: 'POST',
-          headers: {
-            authorization: '' + (await ctx?.getBearer()),
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          // ,
-          body: JSON.stringify({ token: token }),
-        },
-      ).catch(console.log);
+      return f('/device', {
+        method: 'POST',
+        body: { token: token },
+      });
     };
 
     if (token) {
-      console.log('Device token registration' + token);
-      fn().catch(console.error);
+      console.log('Device token registration: ' + token);
+      fn().then(console.log).catch(console.error);
     }
-  }, [token, ctx]);
+  }, [token, f]);
 
   return <></>;
 };
