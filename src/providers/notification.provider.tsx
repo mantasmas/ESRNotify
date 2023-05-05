@@ -118,7 +118,14 @@ export const Notifications = () => {
 
     if (token) {
       console.log('Device token registration: ' + token);
-      fn().then(console.log).catch(console.error);
+      fn()
+        .then(res => {
+          console.log(res.status);
+
+          return res.text();
+        })
+        .then(console.log)
+        .catch(console.error);
     }
   }, [token, f]);
 
