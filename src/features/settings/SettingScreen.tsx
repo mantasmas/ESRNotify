@@ -19,7 +19,11 @@ const ContainerSpaced = styled(Container)`
 export const SettingsScreen = () => {
   const ctx = useAuth();
 
-  const logout = ctx?.signout;
+  if (!ctx) {
+    return <></>;
+  }
+
+  const logout = ctx.signout;
 
   return (
     <ContainerSpaced>

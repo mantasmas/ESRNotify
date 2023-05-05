@@ -32,7 +32,6 @@ export function Navigation() {
   }
 
   const { user } = ctx;
-
   return (
     <NavigationContainer>
       {!user ? (
