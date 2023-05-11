@@ -6,6 +6,7 @@ import { firebase } from '@react-native-firebase/messaging';
 import { useEffect } from 'react';
 import { useAuth } from './auth.provider';
 import { useFetch } from './http.provider';
+import { Alert } from 'react-native';
 
 type DeviceToken = {
   token: string | null;
@@ -128,6 +129,36 @@ export const Notifications = () => {
         .catch(console.error);
     }
   }, [token, f]);
+
+  // useEffect(() => {
+  //   firebase.messaging().onNotificationOpenedApp(remoteMessage => {
+  //     console.log(
+  //       'Notification caused app to open from background state:',
+  //       remoteMessage.notification,
+  //     );
+  //   });
+
+  //   // Check whether an initial notification is available
+  //   firebase
+  //     .messaging()
+  //     .getInitialNotification()
+  //     .then(remoteMessage => {
+  //       if (remoteMessage) {
+  //         console.log(
+  //           'Notification caused app to open from quit state:',
+  //           remoteMessage.notification,
+  //         );
+  //       }
+  //     });
+  // });
+
+  useEffect(() => {
+    const unsubscribe = firebase.messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
 
   return <></>;
 };
