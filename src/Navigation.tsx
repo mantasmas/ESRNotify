@@ -6,7 +6,7 @@ import { LoginScreen } from './features/auth';
 import { useAuth } from './providers/auth.provider';
 import { DashboardScreen } from './features/dashboard';
 import { SettingsScreen } from './features/settings';
-import { NewTrackerScreen } from './features/tracker';
+import { NewTrackerScreen, SelectList } from './features/tracker';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +49,7 @@ export function Navigation() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="NewTrackerScreen" component={NewTrackerScreen} />
+          <Stack.Screen name="SelectList" component={SelectList} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

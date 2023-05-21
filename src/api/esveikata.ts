@@ -26,7 +26,7 @@ export const getInstitutions = async () => {
 };
 
 export type Specialist = {
-  fullName: number;
+  fullName: string;
   institution: {
     istgId: number;
   };
