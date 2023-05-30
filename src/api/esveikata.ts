@@ -17,6 +17,7 @@ export type Institution = {
   istgId: number;
   istgPavadinimas: string;
   municipalityId: number;
+  nameExt: string;
 };
 
 export const getInstitutions = async () => {

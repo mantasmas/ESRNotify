@@ -23,7 +23,6 @@ export const usePresenter = () => {
   const { data: specialistData } = useQuery(['specialists'], getSpecialists);
   const { data: professionsData } = useQuery(['professions'], getProfessions);
   const { data: servicesData } = useQuery(['services'], getServices);
-
   const {
     municipalityId,
     institutionId,
@@ -31,14 +30,6 @@ export const usePresenter = () => {
     professionId,
     serviceId,
   } = useFiltersStore();
-  console.log(
-    '🚀 ~ file: usePresenter.ts:34 ~ usePresenter ~ specialistId:',
-    specialistId,
-  );
-  console.log(
-    '🚀 ~ file: usePresenter.ts:34 ~ usePresenter ~ institutionId:',
-    institutionId,
-  );
 
   const onSelectMunicipality = () => {
     navigation.navigate('SelectList', {
@@ -52,9 +43,9 @@ export const usePresenter = () => {
 
   const onSelectInstitution = () => {
     navigation.navigate('SelectList', {
-      items: institutionsData!.map(({ istgId, istgPavadinimas }) => ({
+      items: institutionsData!.map(({ istgId, nameExt }) => ({
         id: istgId,
-        value: istgPavadinimas,
+        value: nameExt,
       })),
       listType: 'institutions',
     });
